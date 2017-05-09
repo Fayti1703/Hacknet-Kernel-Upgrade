@@ -33,6 +33,8 @@ namespace KernelUpgradeMod
             Pathfinder.Command.Handler.RegisterCommand("mkfile", Commands.mkfileCommand, "Creates a new file", true);
             Pathfinder.Command.Handler.RegisterCommand("rmdir", Commands.rmdirCommand, "Removes a directory", true);
             Pathfinder.Command.Handler.RegisterCommand("~", Commands.rootShortcutCommand, "Root shortcut", true);
+
+            Pathfinder.Command.Handler.RegisterCommand("views", Views.Views.Command, "Views application", true);
         }
 
         public void Unload()

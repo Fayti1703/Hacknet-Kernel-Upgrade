@@ -35,7 +35,7 @@ namespace KernelUpgradeMod
                                 os.netMap.nodes[i].location.X = x;
                                 os.netMap.nodes[i].location.Y = y;
                                 os.write("IP " + args[3] + " was moved successfully.");
-                                return true;
+                                return false;
                             }
                             catch (Exception ex)
                             {
@@ -57,7 +57,7 @@ namespace KernelUpgradeMod
                         if (os.netMap.nodes[i].ip == args[3])
                         {
                             os.write("Position of " + args[3] + " : x(" + os.netMap.nodes[i].location.X + ") y(" + os.netMap.nodes[i].location.Y + ")");
-                            return true;
+                            return false;
                         }
                     }
                     os.write("IP " + args[3] + " invalid.");
@@ -76,7 +76,7 @@ namespace KernelUpgradeMod
                             {
                                 os.netMap.visibleNodes.Remove(i);
                                 os.write("IP " + os.connectedIP + " successfully forgotten.");
-                                return true;
+                                return false;
                             }
                         }
                     }
@@ -86,7 +86,7 @@ namespace KernelUpgradeMod
                         {
                             os.netMap.visibleNodes.Remove(i);
                             os.write("IP " + args[2] + " successfully forgotten.");
-                            return true;
+                            return false;
 
                         }
                     }
@@ -107,7 +107,7 @@ namespace KernelUpgradeMod
                                 os.netMap.visibleNodes.Add(os.netMap.nodes.IndexOf(os.netMap.nodes[i]));
                                 os.netMap.lastAddedNode = os.netMap.nodes[i];
                                 os.write("IP " + args[2] + " successfully discovered.");
-                                return true;
+                                return false;
                             }
                         }
 
@@ -122,7 +122,7 @@ namespace KernelUpgradeMod
         static public bool rootShortcutCommand(OS os, List<string> args)
         {
             os.execute("cd /");
-            return true;
+            return false;
         }
 
         static public bool cpCommand(OS os, List<string> args)
@@ -195,7 +195,7 @@ namespace KernelUpgradeMod
                 }
                 sourceFolder.files.Add(new FileEntry(sourceFile.data, newFileName));
                 os.write("File successfully copied.");
-                return true;
+                return false;
             }
             else
             {
@@ -229,7 +229,7 @@ namespace KernelUpgradeMod
                     }
                     sourceFolder.files.Add(new FileEntry(sourceFile.data, newFileName));
                     os.write("File successfully copied.");
-                    return true;
+                    return false;
                 }
                 else
                 {
@@ -263,7 +263,7 @@ namespace KernelUpgradeMod
                     }
                     directionFolder.files.Add(new FileEntry(sourceFile.data, newFileName));
                     os.write("File successfully copied.");
-                    return true;
+                    return false;
                 }
             }
         }
@@ -286,7 +286,7 @@ namespace KernelUpgradeMod
                             os.exes.RemoveAt(i);
                         }
                     os.write("Killed all running processes.");
-                    return true;
+                    return false;
                 }
                 else
                 {
@@ -312,7 +312,7 @@ namespace KernelUpgradeMod
             Folder folder = Programs.getCurrentFolder(os);
             folder.folders.Add(new Folder(args[1]));
             os.write("Folder " + args[1] + " added.");
-            return true;
+            return false;
         }
 
         static public bool rmdirCommand(OS os, List<string> args)
@@ -335,11 +335,11 @@ namespace KernelUpgradeMod
                 {
                     currentFolder.folders.Remove(folder);
                     os.write("Folder " + args[1] + " successfully removed.");
-                    return true;
+                    return false;
                 }
             }
             os.write("Folder " + args[1] + " not found.");
-            return true;
+            return false;
         }
 
         static public bool mkfileCommand(OS os, List<string> args)
@@ -354,18 +354,18 @@ namespace KernelUpgradeMod
             {
                 folder.files.Add(new FileEntry("", args[1]));
                 os.write("File " + args[1] + " added.");
-                return true;
+                return false;
             }
             else
             {
                 string FileData = args[2];
-                for (int i = 1; i < args.Length - 2; i++)
+                for (int i = 1; i < args.Count - 2; i++)
                 {
                     FileData = FileData + " " + args[i + 2];
                 }
                 folder.files.Add(new FileEntry(FileData, args[1]));
                 os.write("File " + args[1] + " added with content.");
-                return true;
+                return false;
             }
         }
     }
