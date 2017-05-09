@@ -1,38 +1,41 @@
-﻿using System;
+﻿using Pathfinder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace KernelUpgradeMod
 {
-    public class KernelUpgradeMod : Pathfinder.PathfinderMod
+    public class KernelUpgradeMod : IPathfinderMod
     {
 
         static public Dictionary<string, string> aliasedCommands = new Dictionary<string, string>();
 
-
-        public override string GetIdentifier()
+        public string Identifier
         {
-            return "Kernel Upgrade v1";
+            get
+            {
+                return "Kernel Upgrade";
+            }
         }
 
-        public override void Load()
+        public void Load()
         {
 
         }
 
-        public override void LoadContent()
+        public void LoadContent()
         {
-            Pathfinder.Command.Handler.AddCommand("netmap", Commands.netMapCommand, "Utilities for the netmap", true);
-            Pathfinder.Command.Handler.AddCommand("cp", Commands.cpCommand, "Copy files", true);
-            Pathfinder.Command.Handler.AddCommand("kill", Commands.killCommand, "Kill command upgraded", true);
-            Pathfinder.Command.Handler.AddCommand("mkdir", Commands.mkdirCommand, "Creates a new directory", true);
-            Pathfinder.Command.Handler.AddCommand("mkfile", Commands.mkfileCommand, "Creates a new file", true);
-            Pathfinder.Command.Handler.AddCommand("rmdir", Commands.rmdirCommand, "Removes a directory", true);
-            Pathfinder.Command.Handler.AddCommand("~", Commands.rootShortcutCommand, "Root shortcut", true);
+            Pathfinder.Command.Handler.RegisterCommand("netmap", Commands.netMapCommand, "Utilities for the netmap", true);
+            Pathfinder.Command.Handler.RegisterCommand("cp", Commands.cpCommand, "Copy files", true);
+            Pathfinder.Command.Handler.RegisterCommand("kill", Commands.killCommand, "Kill command upgraded", true);
+            Pathfinder.Command.Handler.RegisterCommand("mkdir", Commands.mkdirCommand, "Creates a new directory", true);
+            Pathfinder.Command.Handler.RegisterCommand("mkfile", Commands.mkfileCommand, "Creates a new file", true);
+            Pathfinder.Command.Handler.RegisterCommand("rmdir", Commands.rmdirCommand, "Removes a directory", true);
+            Pathfinder.Command.Handler.RegisterCommand("~", Commands.rootShortcutCommand, "Root shortcut", true);
         }
 
-        public override void Unload()
+        public void Unload()
         {
 
         }

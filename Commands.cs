@@ -8,9 +8,9 @@ namespace KernelUpgradeMod
 {
     static class Commands
     {
-        static public bool netMapCommand(OS os, string[] args)
+        static public bool netMapCommand(OS os, List<string> args)
         {
-            if (args.Length < 2)
+            if (args.Count < 2)
             {
                 os.write("Usage : netmap [forget/discover/set/get]");
                 return false;
@@ -18,7 +18,7 @@ namespace KernelUpgradeMod
             switch (args[1])
             {
                 case "set":
-                    if (args.Length != 6)
+                    if (args.Count != 6)
                     {
                         os.write("Usage : netmap set pos [IP] [X] [Y]");
                         return false;
@@ -47,7 +47,7 @@ namespace KernelUpgradeMod
                     os.write("Impossible to move " + args[3] + " : IP invalid.");
                     return false;
                 case "get":
-                    if (args.Length < 4)
+                    if (args.Count < 4)
                     {
                         os.write("Usage : netmap get pos [IP]");
                         return false;
@@ -63,7 +63,7 @@ namespace KernelUpgradeMod
                     os.write("IP " + args[3] + " invalid.");
                     return false;
                 case "forget":
-                    if (args.Length == 2)
+                    if (args.Count == 2)
                     {
                         if (os.connectedIP == os.thisComputer.ip)
                         {
@@ -93,7 +93,7 @@ namespace KernelUpgradeMod
                     os.write("Unable to forget node : IP not discovered");
                     return false;
                 case "discover":
-                    if (args.Length < 3)
+                    if (args.Count < 3)
                     {
                         os.write("Usage : netmap discover [IP]");
                         return false;
@@ -119,20 +119,20 @@ namespace KernelUpgradeMod
             return false;
         }
 
-        static public bool rootShortcutCommand(OS os, string[] args)
+        static public bool rootShortcutCommand(OS os, List<string> args)
         {
             os.execute("cd /");
             return true;
         }
 
-        static public bool cpCommand(OS os, string[] args)
+        static public bool cpCommand(OS os, List<string> args)
         {
             if (os.connectedIP != os.thisComputer.ip)
             {
                 os.write("Can't copy files on a Remote Host.");
                 return false;
             }
-            if (args.Length < 2)
+            if (args.Count < 2)
             {
                 os.write("Usage : cp [FileName] (destination)");
                 return false;
@@ -166,7 +166,7 @@ namespace KernelUpgradeMod
                     }
                 }
             }
-            if (args.Length == 2)
+            if (args.Count == 2)
             {
                 bool isCorrect = false;
                 bool hasBeenChanged = false;
@@ -268,9 +268,9 @@ namespace KernelUpgradeMod
             }
         }
 
-        static public bool killCommand(OS os, string[] args)
+        static public bool killCommand(OS os, List<string> args)
         {
-            if (args.Length == 2)
+            if (args.Count == 2)
             {
                 if (args[0] == "kill" && args[1] == "all")
                 {
@@ -290,21 +290,21 @@ namespace KernelUpgradeMod
                 }
                 else
                 {
-                    Programs.kill(args, os);
+                    Programs.kill(args.ToArray(), os);
                     return false;
                 }
             }
             else
             {
-                Programs.kill(args, os);
+                Programs.kill(args.ToArray(), os);
                 return false;
             }
 
         }
 
-        static public bool mkdirCommand(OS os, string[] args)
+        static public bool mkdirCommand(OS os, List<string> args)
         {
-            if (args.Length <= 1)
+            if (args.Count <= 1)
             {
                 os.write("Usage : mkdir [FOLDER NAME]");
                 return false;
@@ -315,9 +315,9 @@ namespace KernelUpgradeMod
             return true;
         }
 
-        static public bool rmdirCommand(OS os, string[] args)
+        static public bool rmdirCommand(OS os, List<string> args)
         {
-            if (args.Length < 2)
+            if (args.Count < 2)
             {
                 os.write("Usage : rmdir [FOLDER NAME]");
                 return false;
@@ -342,15 +342,15 @@ namespace KernelUpgradeMod
             return true;
         }
 
-        static public bool mkfileCommand(OS os, string[] args)
+        static public bool mkfileCommand(OS os, List<string> args)
         {
-            if (args.Length <= 1)
+            if (args.Count <= 1)
             {
                 os.write("Usage : mkfile [FILE NAME]");
                 return false;
             }
             Folder folder = Programs.getCurrentFolder(os);
-            if (args.Length == 2)
+            if (args.Count == 2)
             {
                 folder.files.Add(new FileEntry("", args[1]));
                 os.write("File " + args[1] + " added.");
