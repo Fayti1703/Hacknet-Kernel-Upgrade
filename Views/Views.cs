@@ -20,7 +20,12 @@ namespace KernelUpgradeMod.Views
             {
                 if(args[1] == "load")
                 {
-                    if(args.Count != 3)
+                    if (!checkInstalled(os))
+                    {
+                        os.write("Views is not installed.");
+                        return false;
+                    }
+                    if (args.Count != 3)
                     {
                         os.write("Usage : views load [viewname]");
                         return false;
@@ -73,6 +78,11 @@ namespace KernelUpgradeMod.Views
 
                 if(args[1] == "save")
                 {
+                    if (!checkInstalled(os))
+                    {
+                        os.write("Views is not installed.");
+                        return false;
+                    }
                     if (args.Count == 3)
                     {
                         string viewname = args[2] + ".view";
@@ -97,6 +107,9 @@ namespace KernelUpgradeMod.Views
                             string text = comp.ip + " " + comp.location.X + " " + comp.location.Y + "\n";
                             viewFile.data += text;
                         }
+
+                        os.write("Netmap dumped successfully.");
+                        return false;
                     }
                     else
                     {
@@ -272,7 +285,7 @@ namespace KernelUpgradeMod.Views
 
             Folder viewsFolder = new Folder("Views");
 
-            viewsFolder.files.Add(new FileEntry("1111110000010010110001011101101111100101011101001101011111010101010000100101000100100101100001", "views.bin"));
+            viewsFolder.files.Add(new FileEntry("11111100000100101100010111011011111001010111010011010111110101010100001001100011010110010110011010011111101001000000100010100000100000111100101010101110101000100100101100001", "views.bin"));
             homeFolder.folders.Add(viewsFolder);
         }
     }
