@@ -32,13 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FNA">
-      <HintPath>F:\Program Files (x86)\Steam\steamapps\common\Hacknet\FNA.dll</HintPath>
+      <HintPath>../Hacknet-Pathfinder/lib/FNA.dll</HintPath>
     </Reference>
     <Reference Include="HacknetPathfinder">
-      <HintPath>F:\Program Files (x86)\Steam\steamapps\common\Hacknet\HacknetPathfinder.exe</HintPath>
+      <HintPath>../Hacknet-Pathfinder/lib/HacknetPathfinder.exe</HintPath>
     </Reference>
     <Reference Include="Pathfinder">
-      <HintPath>F:\Program Files (x86)\Steam\steamapps\common\Hacknet\Pathfinder.dll</HintPath>
+      <HintPath>../Hacknet-Pathfinder/lib/Pathfinder.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
